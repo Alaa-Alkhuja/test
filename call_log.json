@@ -1,0 +1,52 @@
+var data = [
+    { 
+    "id": 1, 
+    "customer_number": "4423",
+    "salutation": "Frau",
+    "first_name": "Beverlie", 
+    "last_name": "Yeoman", 
+    "email": "byeoman0@google.it", 
+    "telephone": "123456789",
+    "contact_person_first_name": "Max",
+    "contact_person_last_name": "Muster",
+    "status": "Angenommen",
+    "date": "01.06.2021",
+    "start_time": "10:00",
+    "end_time": "10:05",
+    "company": "Butterfly GmbH",
+    "position": "HR Manager"
+
+    }, { 
+    "id": 2, 
+    "customer_number": "6658",
+    "salutation": "Frau",
+    "first_name": "Mabel", 
+    "last_name": "Saurin", 
+    "email": "msaurin1@facebook.com", 
+    "telephone": "987654321",
+    "contact_person_first_name": "John",
+    "contact_person_last_name": "Doe",
+    "status": "Verpasst",
+    "date": "01.06.2021",
+    "start_time": "10:30",
+    "end_time": "--:--",
+    "company": "XZ Restaurant",
+    "position": "Verkaufsleiter"
+    }, { 
+    "id": 3, 
+    "customer_number": "6692",
+    "salutation": "Herr",
+    "first_name": "Magnum", 
+    "last_name": "Moniker", 
+    "email": "mmoniker2@geocities.com", 
+    "telephone": "321459876",
+    "contact_person_first_name": "Alex",
+    "contact_person_last_name": "Schmidt",
+    "status": "Angenommen",
+    "date": "01.06.2021",
+    "start_time": "11:00",
+    "end_time": "11:10",
+    "company": "Werkzeug GmbH",
+    "position": "Support"
+    }
+]

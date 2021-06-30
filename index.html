@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="call_log.json"></script> 
+</head>
+<body>
+    <div class="container"> 
+		<p id="clock"></p>
+		<h2>Anrufliste</h2>
+        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
+        <table id="my_table" class="table order-table"> 
+        </table> 
+    </div> 
+</body> 
+<script>
+	// Uhr Funktion:
+	function timer(){
+		document.getElementById("clock").innerHTML = "Date : " + Date();
+	}
+	setInterval(timer, 1000);
+</script>
+
+<!-- <script>
+	// Uhr Funktion:
+	setInterval(date_time, 1000);
+    
+    function date_time(){
+    	var dt = new Date();
+        document.getElementById("clock").innerHTML=
+        dt.getHours() + ":" + 
+        dt.getMinutes() + ":" + 
+        dt.getSeconds() + " - " + 
+        dt.getDate() + "." + 
+        (dt.getMonth()+1) + "." + 
+        dt.getFullYear();
+    }
+</script> -->
+
+<script>
+    var local_data = data; 
+	table_output(local_data);
+
+// Tabelle ausgabe:
+	function table_output(local_data){
+		var row_data = '<th>Kundennummer</th>' + '<th>Anrede</th>' + '<th>Vorname</th>' + '<th>Nachname</th>' + '<th>E-Mail</th>' + '<th>Telefon</th>' + 
+		'<th>Ansprechpartner-Vorname</th>' + '<th>Ansprechpartner-Nachname</th>' + '<th>Status</th>' + '<th>Datum</th>' + '<th>Startzeit</th>' + 
+		'<th>Endzeit</th>' + '<th>Firma</th>' + '<th>Position</th>' + '<th>Löschen</th>' + '<th>Notiz</th>'; 
+
+		for (var i = 0; i < local_data.length; i++) { 
+				row_data = row_data + '<tr>' + 
+				'<td>' + local_data[i].customer_number + '</td>' + 
+				'<td>' + local_data[i].salutation + '</td>' + 
+				'<td>' + local_data[i].first_name + '</td>' + 
+				'<td>' + local_data[i].last_name + '</td>' + 
+				'<td>' + local_data[i].email + '</td>' + 
+				'<td>' + local_data[i].telephone + '<a href=tel://' + local_data[i].telephone + '> Anrufen</a>' + '</td>' + 
+				'<td>' + local_data[i].contact_person_first_name + '</td>' +
+				'<td>' + local_data[i].contact_person_last_name + '</td>' +
+				'<td>' + local_data[i].status + '</td>' +
+				'<td>' + local_data[i].date + '</td>' +
+				'<td>' + local_data[i].start_time + '</td>' +
+				'<td>' + local_data[i].end_time + '</td>' +
+				'<td>' + local_data[i].company + '</td>' +
+				'<td>' + local_data[i].position + '</td>' +
+				'<td><button onclick=delete_row('+i+')>Löschen</button></td>' +
+				'<td><button onclick=add_note('+i+')>Notitz Hinzufügen/Ändern</button></td>' +
+				'<td><span id=note_id'+i+'></span></td>'
+				'</tr>'; 
+		} 
+		// var table_body_element = document.createElement('tbody'); 
+		// table_body_element.innerHTML = row_data; 
+		// document.getElementById('my_table').appendChild(table_body_element); 
+		document.getElementById('my_table').innerHTML = row_data;
+	}
+</script>
+
+<script>
+	// Zeile löschen
+	function delete_row(x){
+		local_data.splice(x, 1);
+		table_output(local_data);
+	}
+</script>
+
+<script>
+	// Notitz Hinzufügen/Ändern
+	function add_note(x){
+		var note_id="note_id" + x;
+		var txt;
+		var input = prompt("Fügen Sie hier Ihre Notiz hinzu:", "Erledigt");
+        if (input == null || input == "") {
+        	txt = "Keine Notiz.";
+        } else {
+        	txt = input;
+        }
+		document.getElementById(note_id).innerHTML = txt;
+	}
+</script>
+
+<script>
+// FilterFunktion:
+    (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('light-table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+</html>
